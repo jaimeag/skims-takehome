@@ -1,12 +1,27 @@
 package data
 
+type Move struct {
+	Name string `json:"name"`
+	Url  string `json:"url"`
+}
+type PokemonMove struct {
+	// MVP only requires move key from api resp but nesting
+	// is used to emulate resp structure
+	Move Move `json:"move"`
+}
+
 type PokemonApiResponse struct {
-	Id     int    `json:"id"`
-	Name   string `json:"name"`
-	Height int    `json:"height"`
-	Weight int    `json:"weight"`
+	Id          int           `json:"id"`
+	Name        string        `json:"name"`
+	Height      int           `json:"height"`
+	Weight      int           `json:"weight"`
+	Moves       []PokemonMove `json:"moves"`
+	RandomMoves []Move        `json:"random_moves`
 }
 
 type PokemonApiSpeciesResponse struct {
-	Id int `json:"id"`
+	Id            int    `json:"id"`
+	Name          string `json:"name"`
+	Color         string `json:"color"`
+	BaseHappiness string `json:"base_happiness"`
 }
