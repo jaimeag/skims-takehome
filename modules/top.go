@@ -26,6 +26,6 @@ func (m *TopRouterModule) TopFivePokemonInfoHandler(w http.ResponseWriter, r *ht
 	w.Header().Add("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(resp); err != nil {
 		// TODO - handle error logging
-		http.Error(w, "an issue occured while encoding response", http.StatusInternalServerError)
+		http.Error(w, "an issue occurred while encoding response", http.StatusInternalServerError)
 	}
 }
