@@ -20,8 +20,8 @@ type PokemonApiResponse struct {
 	Name        string        `json:"name"`
 	Height      int           `json:"height"`
 	Weight      int           `json:"weight"`
-	Moves       []PokemonMove `json:"moves"`
-	RandomMoves []Move        `json:"random_moves`
+	Moves       []PokemonMove `json:"moves,omitempty"`
+	RandomMoves []Move        `json:"random_moves"`
 }
 
 type PokemonApiSpeciesResponse struct {

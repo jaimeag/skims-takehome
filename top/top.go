@@ -9,8 +9,10 @@ type TopModule struct {
 }
 
 type PokemonAndSpeciesInfo struct {
-	data.PokemonApiResponse
 	data.PokemonApiSpeciesResponse
+	data.PokemonApiResponse
+	Id   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 var (
@@ -62,8 +64,10 @@ func (m *TopModule) getPokemonAndSpeciesInfo(pokemonId int) (*PokemonAndSpeciesI
 	}
 
 	return &PokemonAndSpeciesInfo{
-		*pokemonInfo,
 		*speciesInfo,
+		*pokemonInfo,
+		pokemonInfo.Id,
+		pokemonInfo.Name,
 	}, nil
 
 }
