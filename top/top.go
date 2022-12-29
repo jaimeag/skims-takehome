@@ -61,13 +61,6 @@ func (m *TopModule) GetTopFivePokemonInfo() (*FavoritePokemonInfo, error) {
 		BaseHappinessAverage: average,
 		BaseHappinessMedian:  median,
 	}, nil
-	// info, err := data.GetPokemonInfo(479)
-	// if err != nil {
-	// }
-	// for each pokemon, call a function parse-data that parses the response according to the
-	// challenge
-
-	// once done, write response
 }
 
 func (m *TopModule) getPokemonAndSpeciesInfo(pokemonId int) (*PokemonAndSpeciesInfo, error) {
