@@ -1,54 +1,31 @@
 package modules
 
 import (
-	data "github.com/jaimeag/skims-takehome/data"
+	"encoding/json"
+	"net/http"
+
+	top "github.com/jaimeag/skims-takehome/top"
 )
 
-type TopModule struct {
-	topProvider *data.TopProvider
+type TopRouterModule struct {
+	topModule *top.TopModule
 }
 
-type PokemonAndSpeciesInfo struct {
-	data.PokemonApiResponse
-	data.PokemonApiSpeciesResponse
-}
-
-var (
-	favoritePokemonIds = [5]int{1, 2, 3, 4, 5}
-)
-
-func NewTopModule() *TopModule {
-	return &TopModule{
-		topProvider: data.NewTopProvider(),
+func NewTopRouterModule() *TopRouterModule {
+	return &TopRouterModule{
+		topModule: top.NewTopModule(),
 	}
 }
 
-func (m *TopModule) GetTopFivePokemonInfo() {
-	// get pokemon data for five pokemon
-	// info, err := data.GetPokemonInfo(479)
-	// if err != nil {
-	// }
-	// for each pokemon, call a function parse-data that parses the response according to the
-	// challenge
-
-	// once done, write response
-}
-
-func (m *TopModule) GetPokemonAndSpeciesInfo(pokemonId int) (*PokemonAndSpeciesInfo, error) {
-
-	pokemonInfo, err := m.topProvider.GetPokemonInfo(pokemonId)
+func (m *TopRouterModule) TopFivePokemonInfoHandler(w http.ResponseWriter, r *http.Request) {
+	resp, err := m.topModule.GetTopFivePokemonInfo()
 	if err != nil {
-		return nil, err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-
-	speciesInfo, err := m.topProvider.GetPokemonSpeciesInfo(pokemonId)
-	if err != nil {
-		return nil, err
+	w.Header().Add("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(resp); err != nil {
+		// TODO - handle error logging
+		http.Error(w, "an issue occured while encoding response", http.StatusInternalServerError)
 	}
-
-	return &PokemonAndSpeciesInfo{
-		*pokemonInfo,
-		*speciesInfo,
-	}, nil
-
 }

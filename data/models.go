@@ -10,6 +10,11 @@ type PokemonMove struct {
 	Move Move `json:"move"`
 }
 
+type PokemonColor struct {
+	Id   int    `json:"id"`
+	Name string `json:"name"`
+}
+
 type PokemonApiResponse struct {
 	Id          int           `json:"id"`
 	Name        string        `json:"name"`
@@ -20,8 +25,8 @@ type PokemonApiResponse struct {
 }
 
 type PokemonApiSpeciesResponse struct {
-	Id            int    `json:"id"`
-	Name          string `json:"name"`
-	Color         string `json:"color"`
-	BaseHappiness string `json:"base_happiness"`
+	Id            int          `json:"id"`
+	Name          string       `json:"name"`
+	Color         PokemonColor `json:"color"`
+	BaseHappiness int          `json:"base_happiness"`
 }

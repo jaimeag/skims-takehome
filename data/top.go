@@ -49,7 +49,7 @@ func (p *TopProvider) GetPokemonSpeciesInfo(pokemonId int) (*PokemonApiSpeciesRe
 	return payload, nil
 }
 
-func (p *TopProvider) GetRandomizedPokemonMoves(pokemonInfo *PokemonApiResponse) []Move {
+func (p *TopProvider) GetRandomizedPokemonMovesFromPokemonInfo(pokemonInfo *PokemonApiResponse) []Move {
 	rand.Seed(time.Now().UnixNano())
 	movesToRandomize := []Move{}
 
