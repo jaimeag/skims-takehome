@@ -12,7 +12,7 @@ func main() {
 	logger := log.New(os.Stdout, "skims-takehome", log.LstdFlags)
 	srv := &http.Server{
 		Addr:    ":8080",
-		Handler: modules.NewRouter(),
+		Handler: modules.NewRouter(logger),
 	}
 	logger.Print("Starting server on port 8080")
 	if err := srv.ListenAndServe(); err != nil {
